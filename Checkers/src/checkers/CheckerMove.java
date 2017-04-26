@@ -28,7 +28,7 @@ public class CheckerMove {
     }
 
     /*
-    noMovesLeft return true if no more movents are left for the next player
+    noMovesLeft return true if no more movements are left for the next player
     else it returns false
     */
     static boolean noMovesLeft(int[][] board,int toMove)
@@ -230,7 +230,7 @@ public class CheckerMove {
             return illegalMove;
         }
 
-		static boolean canCapture(int[][] board, int toMove)
+	    static boolean canCapture(int[][] board, int toMove)
 		{
 			for (int i=0; i<8; i++)
 				for (int j=0; j<8; j++)
