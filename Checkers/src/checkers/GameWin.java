@@ -3,6 +3,7 @@ package checkers;
 import javax.swing.*;
 import java.awt.*;
 
+@SuppressWarnings("serial")
 public class GameWin extends JDialog{
     Point p;
     JLabel masseage=new JLabel();
