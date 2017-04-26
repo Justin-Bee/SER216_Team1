@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.io.*;
 import java.awt.*;
 
+@SuppressWarnings("serial")
 public class Help extends JDialog {
     JScrollPane hlp=new JScrollPane();
     JTextArea txt=new JTextArea();
@@ -35,7 +36,7 @@ public class Help extends JDialog {
     private void addText() {
         String str;
         try {
-            BufferedReader b=new BufferedReader(new FileReader(new File("src//guidance//HowToPlay.is")));
+            BufferedReader b=new BufferedReader(new FileReader(new File("src/guidance/HowToPlay.is")));
             try {
                 while((str=b.readLine())!=null)
                     txt.append(str+"\n");
