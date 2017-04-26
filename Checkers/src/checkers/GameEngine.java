@@ -11,13 +11,10 @@ public class GameEngine {
     final static int edge=10;               // effect of king being on the edge
 
 /*********************  Evaluation Function  **********************************
-
 For normal checkers;
     Eval=(weightOfChecker + PositionWeight*(position)^2)*numberOfCheckers + randomWeight;
-
 For kings;
     Eval=(weightOfKing - EdgeWeight*numberOfEdges)*numberOfKings + randomWeight;
-
 Weight of checkers
     Own normal checker = 100
     Opposite normal checker = -100
