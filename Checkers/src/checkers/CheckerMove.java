@@ -35,7 +35,7 @@ public class CheckerMove {
     {
             for (int i=0; i<8; i++){
                     for (int j=0; j<8; j++){
-                        if ( (float)(i+j)/2 != (i+j)/2 )
+                        if ( Math.ceil((float)(i+j)/2 )!= (i+j)/2 )
                         {
                                 if (toMove == Checkers.redNormal &&
                                         (board[i][j] == Checkers.redNormal ||
