@@ -63,7 +63,7 @@ Weight of checkers
                 }
             }
         }
-        score += (int)(Math.random() * 10);                    //Adds a random weight
+       // score += (int)(Math.random() * 10);                    //Adds a random weight
 
         return score;
     }
