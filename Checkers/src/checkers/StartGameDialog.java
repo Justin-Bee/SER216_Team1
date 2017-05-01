@@ -38,8 +38,7 @@ import javax.swing.event.DocumentListener;
  * Start game options
  */
 public class StartGameDialog extends JDialog{
-	Checkers checker = new Checkers();
-	
+		
 	public StartGameDialog(){
 		
 	}
@@ -108,12 +107,12 @@ public class StartGameDialog extends JDialog{
         contentPanel.add(p2);
         p1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-        		checker.update1Player();
+        		checkers.update1Player();
             }
         });
         p2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-        		checker.update2Player();
+        		checkers.update2Player();
             }
         });
         
@@ -151,7 +150,7 @@ public class StartGameDialog extends JDialog{
         okButton.setActionCommand("OK");
         okButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-        		checker.updateStartButton();
+        		checkers.updateStartButton();
         		handleCloseButton();
             }
         });
