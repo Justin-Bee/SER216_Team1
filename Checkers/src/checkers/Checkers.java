@@ -1,12 +1,15 @@
 package checkers;
 
 import javax.swing.*;
+
+
+
 import java.awt.event.*;
 import java.awt.*;
 
 @SuppressWarnings("serial")
 public class Checkers extends JPanel implements ActionListener, ItemListener, MouseMotionListener, MouseListener {
-
+	StartGameDialog startGameDialog = new StartGameDialog();
     Graphics g;
 
     JTextArea msg=new JTextArea("Start a new game... Yellow is to move first...");
@@ -23,9 +26,9 @@ public class Checkers extends JPanel implements ActionListener, ItemListener, Mo
     JButton hlpB=new JButton(hlp);
     JButton snB=new JButton(snp);
 
-    ButtonGroup players = new ButtonGroup();
-    JRadioButton p1 = new JRadioButton("1-Player", true);
-    JRadioButton p2 = new JRadioButton("2-Player", false);
+//    ButtonGroup players = new ButtonGroup();
+//    JRadioButton p1 = new JRadioButton("1-Player", true);
+//    JRadioButton p2 = new JRadioButton("2-Player", false);
 
     ButtonGroup colors = new ButtonGroup();
     JRadioButton c1 = new JRadioButton("Red", false);
@@ -33,9 +36,9 @@ public class Checkers extends JPanel implements ActionListener, ItemListener, Mo
 
     Help hp=new Help();
 
-    JLabel mode=new JLabel("Mode");
+//    JLabel mode=new JLabel("Mode");
     JLabel col=new JLabel("Colour");
-    JLabel diff=new JLabel("Difficulty Level");
+//    JLabel diff=new JLabel("Difficulty Level");
     JLabel rp=new JLabel();
     JLabel rpt=new JLabel("Your Piece");
     JLabel bpt=new JLabel("Opponent's Piece");
@@ -45,7 +48,7 @@ public class Checkers extends JPanel implements ActionListener, ItemListener, Mo
     JLabel bkt=new JLabel("Opponent's King");
     JLabel bk=new JLabel();
 
-    JComboBox level=new JComboBox();
+//    JComboBox level=new JComboBox();
 
     String selectedColor;
     int selectedMode;
@@ -87,6 +90,7 @@ public class Checkers extends JPanel implements ActionListener, ItemListener, Mo
     Checkers(){
         setupGUI();
     }
+    
 
     private void setupGUI(){
         setLayout(null);
@@ -95,18 +99,18 @@ public class Checkers extends JPanel implements ActionListener, ItemListener, Mo
         unB.setFocusPainted(false);
         c1.setFocusPainted(false);
         c2.setFocusPainted(false);
-        p1.setFocusPainted(false);
-        p2.setFocusPainted(false);
+//        p1.setFocusPainted(false);
+//        p2.setFocusPainted(false);
         hlpB.setFocusPainted(false);
         snB.setFocusPainted(false);
 
-        diff.setFont(new Font("SansSerif",Font.PLAIN,11));
+//        diff.setFont(new Font("SansSerif",Font.PLAIN,11));
         col.setFont(new Font("SansSerif",Font.PLAIN,11));
-        mode.setFont(new Font("SansSerif",Font.PLAIN,11));
+//        mode.setFont(new Font("SansSerif",Font.PLAIN,11));
         c1.setFont(new Font("SansSerif",Font.PLAIN,11));
         c2.setFont(new Font("SansSerif",Font.PLAIN,11));
-        p1.setFont(new Font("SansSerif",Font.PLAIN,11));
-        p2.setFont(new Font("SansSerif",Font.PLAIN,11));
+//        p1.setFont(new Font("SansSerif",Font.PLAIN,11));
+//        p2.setFont(new Font("SansSerif",Font.PLAIN,11));
         nwB.setFont(new Font("SansSerif",Font.BOLD,11));
         unB.setFont(new Font("SansSerif",Font.BOLD,11));
         hlpB.setFont(new Font("SansSerif",Font.PLAIN,11));
@@ -130,18 +134,18 @@ public class Checkers extends JPanel implements ActionListener, ItemListener, Mo
         snB.setBounds(460,10,25,25);
         this.add(snB);
 
-        mode.setBounds(420,260,80,25);
-        this.add(mode);
-        p1.addActionListener(this);
-        p2.addActionListener(this);
-        p1.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        p2.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        players.add(p1);
-        players.add(p2);
-        p1.setBounds(415,290,80,25);
-        p2.setBounds(415,318,80,25);
-        this.add(p1);
-        this.add(p2);
+//        mode.setBounds(420,260,80,25);
+//        this.add(mode);
+//        p1.addActionListener(this);
+//        p2.addActionListener(this);
+//        p1.setCursor(new Cursor(Cursor.HAND_CURSOR));
+//        p2.setCursor(new Cursor(Cursor.HAND_CURSOR));
+//        players.add(p1);
+//        players.add(p2);
+//        p1.setBounds(415,290,80,25);
+//        p2.setBounds(415,318,80,25);
+//        this.add(p1);
+//        this.add(p2);
 
         col.setBounds(110,400,80,25);
         //this.add(col);
@@ -156,20 +160,20 @@ public class Checkers extends JPanel implements ActionListener, ItemListener, Mo
         //this.add(c1);
         //this.add(c2);
 
-        level.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        level.addItemListener(this);
-        level.addItem("Easy");
-        level.addItem("Fairly Easy");
-        level.addItem("Moderate");
-        level.addItem("Bit Difficult");
-        level.addItem("Tough");
-        level.setSelectedIndex(2);
-        level.setBounds(415,200,80,25);
-        this.add(level);
+//        level.setCursor(new Cursor(Cursor.HAND_CURSOR));
+//        level.addItemListener(this);
+//        level.addItem("Easy");
+//        level.addItem("Fairly Easy");
+//        level.addItem("Moderate");
+//        level.addItem("Bit Difficult");
+//        level.addItem("Tough");
+//        level.setSelectedIndex(2);
+//        level.setBounds(415,200,80,25);
+//        this.add(level);
 
-        diff.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        diff.setBounds(415,170,100,25);
-        this.add(diff);
+//        diff.setCursor(new Cursor(Cursor.HAND_CURSOR));
+//        diff.setBounds(415,170,100,25);
+//        this.add(diff);
 
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
@@ -226,34 +230,71 @@ public class Checkers extends JPanel implements ActionListener, ItemListener, Mo
         drawCheckers();
     }
 
+    public void updateStartButton(){
+    	new PlaySound("sounds/button.wav").start();
+    	newGame();
+    }
+    public void update1Player(){
+        new PlaySound("sounds/option.wav").start();
+        col.setEnabled(true);
+        col.setVisible(true);
+//        diff.setEnabled(true);
+//        diff.setVisible(true);
+        c1.setEnabled(true);
+        c1.setVisible(true);
+        c2.setEnabled(true);
+        c2.setVisible(true);
+//        level.setEnabled(true);
+//        level.setVisible(true);
+    }
+    
+    public void update2Player(){
+        new PlaySound("sounds/option.wav").start();
+        col.setEnabled(false);
+        col.setVisible(false);
+//        diff.setEnabled(false);
+//        diff.setVisible(false);
+        c1.setEnabled(false);
+        c1.setVisible(false);
+        c2.setEnabled(false);
+        c2.setVisible(false);
+//        level.setEnabled(false);
+//        level.setVisible(false);
+        c2.setSelected(true);
+    }
+    
+    public void updateLevel(){
+    	
+    }
+    
     public void actionPerformed(ActionEvent e) {
-        if(e.getActionCommand().equalsIgnoreCase("1-Player")){
-            new PlaySound("sounds/option.wav").start();
-            col.setEnabled(true);
-            col.setVisible(true);
-            diff.setEnabled(true);
-            diff.setVisible(true);
-            c1.setEnabled(true);
-            c1.setVisible(true);
-            c2.setEnabled(true);
-            c2.setVisible(true);
-            level.setEnabled(true);
-            level.setVisible(true);
-        }
-        if(e.getActionCommand().equalsIgnoreCase("2-Player")){
-            new PlaySound("sounds/option.wav").start();
-            col.setEnabled(false);
-            col.setVisible(false);
-            diff.setEnabled(false);
-            diff.setVisible(false);
-            c1.setEnabled(false);
-            c1.setVisible(false);
-            c2.setEnabled(false);
-            c2.setVisible(false);
-            level.setEnabled(false);
-            level.setVisible(false);
-            c2.setSelected(true);
-        }
+//        if(e.getActionCommand().equalsIgnoreCase("1-Player")){
+//            new PlaySound("sounds/option.wav").start();
+//            col.setEnabled(true);
+//            col.setVisible(true);
+//            diff.setEnabled(true);
+//            diff.setVisible(true);
+//            c1.setEnabled(true);
+//            c1.setVisible(true);
+//            c2.setEnabled(true);
+//            c2.setVisible(true);
+//            level.setEnabled(true);
+//            level.setVisible(true);
+//        }
+//        if(e.getActionCommand().equalsIgnoreCase("2-Player")){
+//            new PlaySound("sounds/option.wav").start();
+//            col.setEnabled(false);
+//            col.setVisible(false);
+//            diff.setEnabled(false);
+//            diff.setVisible(false);
+//            c1.setEnabled(false);
+//            c1.setVisible(false);
+//            c2.setEnabled(false);
+//            c2.setVisible(false);
+//            level.setEnabled(false);
+//            level.setVisible(false);
+//            c2.setSelected(true);
+//        }
         if(e.getActionCommand().equalsIgnoreCase("red")){
             new PlaySound("sounds/option.wav").start();
         }
@@ -261,8 +302,18 @@ public class Checkers extends JPanel implements ActionListener, ItemListener, Mo
             new PlaySound("sounds/option.wav").start();
         }
         if(e.getActionCommand().equalsIgnoreCase("New Game")){
-            new PlaySound("sounds/button.wav").start();
-            newGame();
+            //new PlaySound("sounds/button.wav").start();
+            //newGame();
+            StartGameDialog startGameDialog = new StartGameDialog(null);
+            startGameDialog.pack();
+            startGameDialog.setVisible(true);
+            if(startGameDialog.isVisible()==true){
+            	newGame();
+            	selectedMode=startGameDialog.playerMode;
+            	difficulty=startGameDialog.levelDiff;
+            	
+            }
+            	
         }
         if(e.getActionCommand().equalsIgnoreCase("Undo") && undoCount>3){
             new PlaySound("sounds/button.wav").start();
@@ -292,8 +343,8 @@ public class Checkers extends JPanel implements ActionListener, ItemListener, Mo
         //Yellow is always at the bottom of the board
 
         selectedColor= c1.isSelected() ? "red" : "yellow";
-        selectedMode=p1.isSelected()?1:2;
-        difficulty=level.getSelectedIndex();
+        selectedMode = startGameDialog.getSelectedMode();
+        difficulty = startGameDialog.getLevelIndex();
 
         unB.setEnabled(false);
 
@@ -461,8 +512,7 @@ public class Checkers extends JPanel implements ActionListener, ItemListener, Mo
 	}
 
     private boolean isPossibleSquare(int i, int j) {
-    	
-		return Math.floorMod(i+j, 2) == 1;
+		return (i+j)%2 == 1;
     }
 
     public void itemStateChanged(ItemEvent e) {          
@@ -497,7 +547,7 @@ public class Checkers extends JPanel implements ActionListener, ItemListener, Mo
                 new PlaySound("sounds/clickChecker.wav").start();
             }
 		}
-        else if ( highlight  && Math.ceil((float)(square[0]+square[1]) / 2) != (square[0]+square[1]) / 2)
+		else if ( highlight  && Math.ceil((float)(square[0]+square[1]) / 2) != (square[0]+square[1]) / 2)
 		{
 			endX = square[0];
 			endY = square[1];

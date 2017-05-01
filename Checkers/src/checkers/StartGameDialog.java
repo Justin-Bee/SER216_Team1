@@ -26,20 +26,22 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.JSpinner;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.SpinnerDateModel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+
+
 /**
  * Start game options
  */
-public class StartGameDialog extends JDialog {
+public class StartGameDialog extends JDialog{
+		
+	public StartGameDialog(){
+		
+	}
     /**
      * Control variables
      */
@@ -50,17 +52,17 @@ public class StartGameDialog extends JDialog {
     JLabel mode=new JLabel("Mode");
     JLabel diff=new JLabel("Difficulty Level");
     JComboBox level=new JComboBox();
-    int selectedMode;
-    int difficulty;
+    int playerMode;
+    int levelDiff;
 
     /**
      * Checkers object
      */
-    static Checkers checkers = null;
+    private Checkers checkers = null;
     /**
      * Defect Log Panel
      */
-    static Checkers checkersPanel;
+    Checkers checkersPanel;
 
     /**
      * Create the dialog.
@@ -76,7 +78,7 @@ public class StartGameDialog extends JDialog {
     /**
      * Initiates the panel with all widgets, buttons, and more
      */
-    public void jbInit() {
+    void jbInit() {
         setBounds(100, 100, 460, 300);
         getContentPane().setLayout(new BorderLayout());
         contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -99,41 +101,79 @@ public class StartGameDialog extends JDialog {
         JRadioButton p2 = new JRadioButton("2-Player", false);
         p1.setPreferredSize(new Dimension(70, 24));
         p2.setPreferredSize(new Dimension(70, 24));
-        p1.addActionListener(checkers);
-        p2.addActionListener(checkers);
-        this.add(p1);
-        this.add(p2)
-        ;
+        players.add(p1);
+        players.add(p2);
+        contentPanel.add(p1);
+        contentPanel.add(p2);
+        p1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+        		checkers.update1Player();
+            }
+        });
+        p2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+        		checkers.update2Player();
+            }
+        });
         
         JLabel diff=new JLabel("Difficulty Level");
         GridBagConstraints gbc_diffLabel = new GridBagConstraints();
         gbc_diffLabel.anchor = GridBagConstraints.SOUTHWEST;
         gbc_diffLabel.insets = new Insets(0, 0, 5, 5);
-        gbc_diffLabel.gridx = 3;
-        gbc_diffLabel.gridy = 2;
+        gbc_diffLabel.gridx = 0;
+        gbc_diffLabel.gridy = 1;
         contentPanel.add(diff, gbc_diffLabel);
         level = new JComboBox();
         level.setModel(new DefaultComboBoxModel(new String[] {"Easy", "Fairly Easy", "Moderate", "Bit Difficult", "Tough"}));
         level.addItemListener(new ItemListener() {
 
 			@Override
-			public void itemStateChanged(ItemEvent e) {
-				// TODO Auto-generated method stub
+			public void itemStateChanged(ItemEvent arg0) {
+				getLevelIndex();
 				
 			}
+        	
+        });
+        GridBagConstraints gbc_levelCombo = new GridBagConstraints();
+        gbc_levelCombo.anchor = GridBagConstraints.SOUTHWEST;
+        gbc_levelCombo.gridx = 1;
+        gbc_levelCombo.gridy = 1;
+        contentPanel.add(level, gbc_levelCombo);
+        
+        JButton okButton = new JButton("OK");
+        GridBagConstraints gbc_okButton = new GridBagConstraints();
+        gbc_diffLabel.anchor = GridBagConstraints.SOUTH;
+        gbc_diffLabel.insets = new Insets(0, 0, 5, 5);
+        gbc_diffLabel.gridx = 3;
+        gbc_diffLabel.gridy = 5;
+        contentPanel.add(okButton, gbc_okButton);
+        okButton.setActionCommand("OK");
+        okButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+        		setVisible(false);
+        		dispose();
+        		new PlaySound("sounds/button.wav").start();
+        		
+            }
+        });
 
-			
-    });
     }
-      
-
+        
+    public int getSelectedMode(){
+    	playerMode=p1.isSelected()?1:2;
+    	return playerMode;
+    }
+    
+    public int getLevelIndex(){
+    	levelDiff = level.getSelectedIndex();
+    	return levelDiff;
+    }
+    
+    
     private void handleCloseButton() {
         // Now close the form
         this.setVisible(false);
         this.dispose();
     }
         
-
-	 
-
-}
+};
