@@ -1,47 +1,40 @@
 package checkers;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.Toolkit;
+import java.awt.event.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
-import javax.swing.BorderFactory;
-import javax.swing.Box;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
+
 
 
 
 /**
  * Start game options
  */
-public class StartGameDialog extends JDialog{
+public class StartGameDialog extends JDialog implements ActionListener{
 		
-	public StartGameDialog(){
-		
-	}
+	/**
+	 * Constructor
+	 */
+	public StartGameDialog(){}
     /**
      * Control variables
      */
@@ -51,7 +44,7 @@ public class StartGameDialog extends JDialog{
     JRadioButton p2 = new JRadioButton("2-Player", false);
     JLabel mode=new JLabel("Mode");
     JLabel diff=new JLabel("Difficulty Level");
-    JComboBox level=new JComboBox();
+    JComboBox<String> level=new JComboBox<String>();
     int playerMode;
     int levelDiff;
 
@@ -60,10 +53,9 @@ public class StartGameDialog extends JDialog{
      */
     private Checkers checkers = null;
     /**
-     * Defect Log Panel
+     * Checker Panel
      */
     Checkers checkersPanel;
-
     /**
      * Create the dialog.
      */
@@ -89,6 +81,8 @@ public class StartGameDialog extends JDialog{
         gbl_contentPanel.columnWeights = new double[] { 1.0, 1.0, 0.0, 1.0, 1.0 };
         gbl_contentPanel.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
         contentPanel.setLayout(gbl_contentPanel);
+        
+        //sets Mode Label preferences
         JLabel mode=new JLabel("Mode");
         GridBagConstraints gbc_modeLabel = new GridBagConstraints();
         gbc_modeLabel.anchor = GridBagConstraints.WEST;
@@ -96,6 +90,8 @@ public class StartGameDialog extends JDialog{
         gbc_modeLabel.gridx = 0;
         gbc_modeLabel.gridy = 0;
         contentPanel.add(mode, gbc_modeLabel);
+        
+        //sets Player Radio preferences
         ButtonGroup players = new ButtonGroup();
         JRadioButton p1 = new JRadioButton("1-Player", true);
         JRadioButton p2 = new JRadioButton("2-Player", false);
@@ -105,17 +101,12 @@ public class StartGameDialog extends JDialog{
         players.add(p2);
         contentPanel.add(p1);
         contentPanel.add(p2);
-        p1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-        		checkers.update1Player();
-            }
-        });
-        p2.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-        		checkers.update2Player();
-            }
-        });
-        
+        //listener for 1 player
+        p1.addActionListener((ActionListener) this);
+        //listener for 2 players
+        p2.addActionListener((ActionListener) this);
+
+        //sets Difficulty Label preferences
         JLabel diff=new JLabel("Difficulty Level");
         GridBagConstraints gbc_diffLabel = new GridBagConstraints();
         gbc_diffLabel.anchor = GridBagConstraints.SOUTHWEST;
@@ -123,8 +114,11 @@ public class StartGameDialog extends JDialog{
         gbc_diffLabel.gridx = 0;
         gbc_diffLabel.gridy = 1;
         contentPanel.add(diff, gbc_diffLabel);
-        level = new JComboBox();
-        level.setModel(new DefaultComboBoxModel(new String[] {"Easy", "Fairly Easy", "Moderate", "Bit Difficult", "Tough"}));
+        
+        //creates difficulty combo box
+        JComboBox<String> level = new JComboBox<String>();
+        level.setModel(new DefaultComboBoxModel<String>(new String[] {"Easy", "Fairly Easy", "Moderate", "Bit Difficult", "Tough"}));
+        //gets value
         level.addItemListener(new ItemListener() {
 
 			@Override
@@ -140,38 +134,72 @@ public class StartGameDialog extends JDialog{
         gbc_levelCombo.gridy = 1;
         contentPanel.add(level, gbc_levelCombo);
         
-        JButton okButton = new JButton("OK");
-        GridBagConstraints gbc_okButton = new GridBagConstraints();
-        gbc_diffLabel.anchor = GridBagConstraints.SOUTH;
-        gbc_diffLabel.insets = new Insets(0, 0, 5, 5);
-        gbc_diffLabel.gridx = 3;
-        gbc_diffLabel.gridy = 5;
-        contentPanel.add(okButton, gbc_okButton);
-        okButton.setActionCommand("OK");
-        okButton.addActionListener(new ActionListener() {
+        //creates button to close dialog
+        JButton startButton = new JButton("START GAME");
+        GridBagConstraints gbc_startButton = new GridBagConstraints();
+        gbc_startButton.anchor = GridBagConstraints.SOUTH;
+        gbc_startButton.insets = new Insets(0, 0, 5, 5);
+        gbc_startButton.gridx = 3;
+        gbc_startButton.gridy = 5;
+        contentPanel.add(startButton, gbc_startButton);
+        startButton.setActionCommand("START GAME");
+        //close dialog
+        startButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-        		checkers.updateStartButton();
-        		handleCloseButton();
+            	setVisible(false);
+        		dispose();
             }
         });
-
-    }
         
+        //creates button to accept option changes
+        JButton acceptButton = new JButton("ACCEPT");
+        GridBagConstraints gbc_acceptButton = new GridBagConstraints();
+        gbc_acceptButton.anchor = GridBagConstraints.SOUTH;
+        gbc_acceptButton.insets = new Insets(0, 0, 5, 5);
+        gbc_acceptButton.gridx = 2;
+        gbc_acceptButton.gridy = 5;
+        contentPanel.add(acceptButton, gbc_acceptButton);
+        acceptButton.setActionCommand("ACCEPT");
+        //adds listener
+        acceptButton.addActionListener((ActionListener) this);
+}
+    /*
+     * Returns selected number of players    
+     * @return playerMode number of players
+     */
     public int getSelectedMode(){
     	playerMode=p1.isSelected()?1:2;
     	return playerMode;
     }
     
+    /*
+     * Returns selected difficulty level
+     * @return levelDiff difficulty level
+     */
     public int getLevelIndex(){
     	levelDiff = level.getSelectedIndex();
     	return levelDiff;
     }
     
-    
-    private void handleCloseButton() {
-        // Now close the form
-        this.setVisible(false);
-        this.dispose();
-    }
+    /*
+     * Handles actions from player selections and accept button (non-Javadoc)
+     * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+     */
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+    	if(arg0.getActionCommand().equalsIgnoreCase("1-Player")){
+    		checkers.update1Player();
+    	}
+    	if(arg0.getActionCommand().equalsIgnoreCase("2-Player")){
+    		checkers.update2Player();
+    	}
+    	if(arg0.getActionCommand().equalsIgnoreCase("ACCEPT")){
+            checkers.selectedMode = getSelectedMode();
+            checkers.difficulty = getLevelIndex();
+            checkers.newGame();
+
+    	}
+		
+	}
         
 };
