@@ -422,7 +422,7 @@ public class Checkers extends JPanel implements ActionListener, ItemListener, Mo
 	}
 
     private boolean isPossibleSquare(int i, int j) {
-		return (i+j)%2 == 1;
+		 Math.floorMod(i+j, 2) == 1;
     }
 
     public void itemStateChanged(ItemEvent e) {          
@@ -457,7 +457,7 @@ public class Checkers extends JPanel implements ActionListener, ItemListener, Mo
                 new PlaySound("Checkers/src/sounds/clickChecker.wav").start();
             }
 		}
-		else if ( highlight  && (float)(square[0]+square[1]) / 2 != (square[0]+square[1]) / 2)
+		else if ( highlight  && Math.ceil((float)(square[0]+square[1]) / 2) != (square[0]+square[1]) / 2)
 		{
 			endX = square[0];
 			endY = square[1];
