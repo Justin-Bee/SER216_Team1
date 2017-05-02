@@ -2,7 +2,7 @@ package checkers;
 
 import javax.swing.*;
 
-
+import checkers.StartGameDialog;
 
 import java.awt.event.*;
 import java.awt.*;
