@@ -13,7 +13,7 @@ public class GameEngine {
 /*********************  Evaluation Function  **********************************
 For normal checkers;
     Eval=(weightOfChecker + PositionWeight*(position)^2)*numberOfCheckers + randomWeight;
-For kings;
+/For kings;
     Eval=(weightOfKing - EdgeWeight*numberOfEdges)*numberOfKings + randomWeight;
 Weight of checkers
     Own normal checker = 100
@@ -23,7 +23,7 @@ Weight of checkers
   
     For normal checkers there is a weight for position.
     The evaluted are less in edges for kings, so that they tend to be in the middle
-    Small random weight between 0-10 was added to reduce the monotony of the game.
+//    Small random weight between 0-10 was added to reduce the monotony of the game.
 **********************************************************************************/
 
     public static int eval(int [][] board){
@@ -60,7 +60,7 @@ Weight of checkers
                 }
             }
         }
-        score += (int)(Math.random() * 10);                    //Adds a random weight
+        //score += (int)(Math.random() * 10);                    //Adds a random weight
 
         return score;
     }
