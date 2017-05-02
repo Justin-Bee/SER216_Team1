@@ -23,7 +23,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.border.EmptyBorder;
 
-
+import checkers.Checkers;
 
 
 /**
