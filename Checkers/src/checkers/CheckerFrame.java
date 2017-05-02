@@ -25,10 +25,10 @@ public class CheckerFrame extends JFrame implements ActionListener{
     private void setupGUI() {
         setLayout(null);
         gmP.setBounds(0,0,508,401);//400,401
-       // gmP.imageUpdate(ne, WIDTH, WIDTH, WIDTH, WIDTH, WIDTH);
+        //gmP.imageUpdate(new, WIDTH, WIDTH, WIDTH, WIDTH, WIDTH);
         add(gmP);
         stB.setHorizontalAlignment(SwingConstants.LEADING);
-        stB.setIcon(new ImageIcon("images/checkersIcon.jpg"));
+        stB.setIcon(new ImageIcon(getClass().getResource("/images/checkersIcon.jpg")));
         stB.setBackground(Color.LIGHT_GRAY);
         stB.setCursor(new Cursor(Cursor.HAND_CURSOR));
         stB.setBounds(154,420,200,60);
@@ -44,6 +44,7 @@ public class CheckerFrame extends JFrame implements ActionListener{
         setResizable(false);
         setVisible(true);
         setTitle("Play Checkers");
+        
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
@@ -57,4 +58,5 @@ public class CheckerFrame extends JFrame implements ActionListener{
             this.setContentPane(gmP);
         }
     }
+   
 }
